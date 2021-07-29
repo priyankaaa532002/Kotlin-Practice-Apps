@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context=".AddStudent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Student Details"
+        android:textSize="40sp"
+        android:textColor="@color/purple_200"
+        android:paddingBottom="30dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/add_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "
+        android:padding="6dp"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        />
+        <EditText
+            android:id="@+id/add_name_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="15"
+            android:textSize="25dp"
+            android:hint="Add name here"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/add_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone No: "
+            android:padding="6dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            />
+
+        <EditText
+            android:id="@+id/add_phone_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Add No. here"
+            android:textSize="25dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/add_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class: "
+            android:padding="6dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:id="@+id/add_class_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="25dp"
+            android:hint="Add class here"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:textSize="25dp"
+        android:padding="10dp"
+        android:onClick="submitData"
+        android:textColor="@color/black"
+        android:backgroundTint="#FAEBD7"
+        />
+
+</LinearLayout>
