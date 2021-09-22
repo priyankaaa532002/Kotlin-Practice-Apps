@@ -1,5 +1,7 @@
 package com.example.passingdata
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_second.*
@@ -16,5 +18,20 @@ class SecondActivity : AppCompatActivity() {
         //val personString = "$name is $age years old and lives in $country"
         //tvPerson.text = personString
         tvPerson.text = person.toString()
+
+        btnTakePhoto.setOnClickListener {
+            Intent(Intent.ACTION_GET_CONTENT).also {
+                it.type = "image/*"
+                startActivityForResult(it,0)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 0){
+            val uri = data?.data
+            ivPhoto.setImageURI(uri)
+        }
     }
 }

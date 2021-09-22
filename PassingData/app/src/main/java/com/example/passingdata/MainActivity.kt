@@ -6,6 +6,13 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,6 +40,88 @@ class MainActivity : AppCompatActivity() {
         //PERMISSIONS ->SENSITIVE(DON'T NEED ACCEPTANCE) / LESS SENSITIVE(NEEDS ACCEPTANCE)
         btnRequestPermission.setOnClickListener {
             requestPermissons()
+        }
+
+        //DIALOG AND ALERT BOXES----->>>>>
+
+        val addContactDialog = AlertDialog.Builder(this)
+            .setTitle("Add Contact")
+            .setMessage("Do you want to continue adding?")
+            .setIcon(R.drawable.ic_person2)
+            .setPositiveButton("Yes"){ _, _ ->
+                Toast.makeText(this,"You added contact",Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Cancel"){ _, _ ->
+                Toast.makeText(this,"You didn't add contact",Toast.LENGTH_SHORT).show()
+            }.create()
+
+        btnOne.setOnClickListener {
+            addContactDialog.show()
+        }
+
+        //RADIO AND DIALOG BOXES
+        val options = arrayOf("One","Two","Three")
+        val singleChoiceDialog = AlertDialog.Builder(this)
+            .setTitle("Chose one of these options")
+            .setSingleChoiceItems(options,0){ dialogInterface, i ->
+                Toast.makeText(this,"You clicked ${options[i]}",Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Accept"){ _, _ ->
+                Toast.makeText(this,"You accepted",Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Declined"){ _, _ ->
+                Toast.makeText(this,"You declined",Toast.LENGTH_SHORT).show()
+            }.create()
+
+        btnTwo.setOnClickListener {
+            singleChoiceDialog.show()
+        }
+
+        //CHECKBOX AND DIALOG BOXES
+        val multiChoiceDialog = AlertDialog.Builder(this)
+            .setTitle("Chose from these options")
+            .setMultiChoiceItems(options, booleanArrayOf(false,false,false)){_,i,isChecked->
+                if (isChecked){
+                    Toast.makeText(this,"You checked ${options[i]}",Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this,"You unchecked ${options[i]}",Toast.LENGTH_SHORT).show()
+                }
+
+            }
+            .setPositiveButton("Accept"){ _, _ ->
+                Toast.makeText(this,"You accepted",Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Declined"){ _, _ ->
+                Toast.makeText(this,"You declined",Toast.LENGTH_SHORT).show()
+            }.create()
+
+        btnThree.setOnClickListener {
+            multiChoiceDialog.show()
+        }
+
+
+        //SPINNER------>>>>>>
+
+        val customList = listOf("one","two","three","four")
+        val adapter = ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,customList)
+        spMonth.adapter = adapter
+
+
+        spMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+            //ctrl + i ---> add em all
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Toast.makeText(this@MainActivity,"you selected ${adapterView?.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
         }
     }
 
@@ -80,4 +169,21 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    //MENU ----->>>>
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_bar_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.miAddContact -> Toast.makeText(this, "add contact?", Toast.LENGTH_SHORT).show()
+            R.id.miFavourites -> Toast.makeText(this, "favy favy?", Toast.LENGTH_SHORT).show()
+            R.id.miSettings -> Toast.makeText(this, "setting hui?", Toast.LENGTH_SHORT).show()
+            R.id.miFeedback -> Toast.makeText(this, "add feedback?", Toast.LENGTH_SHORT).show()
+            R.id.miClose -> finish()
+
+        }
+        return true
+    }
 }
