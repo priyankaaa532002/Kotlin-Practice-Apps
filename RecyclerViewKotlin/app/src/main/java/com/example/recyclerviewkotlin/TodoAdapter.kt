@@ -10,6 +10,7 @@ class TodoAdapter (
     //STEP 3
     var todos: List<Todo>
         ): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
+
     //STEP 1 (AFTER MAKING XML FOR RV AND ITEM
     //1.1 CREATE VIEW HOLDER INNER CLASS FOR HOLDING ITEM
     inner class TodoViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
